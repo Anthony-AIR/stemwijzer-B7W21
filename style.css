@@ -1,3 +1,7 @@
+:root{
+    font-size:24px;
+}
+
 body{
     background-image: url('images/image.png');
     background-size: cover;
@@ -20,22 +24,31 @@ body{
     top:34%;
     left:44%;
     transform:translate(-50%,-50%);
-    width: 600px;
-    height: 400px;
+    width: 530px;
+    height: 330px;
     background-color: white;
     border-radius: 20px;
     z-index:2;
+    padding:70px;
 }
 
 #startbtn{
     position:absolute;
     top:70%;
-    left:10%;
     width:100px;
     height:60px;
     background-color:blue;
     color:white;
     border-radius:10px;
     border:none;
-    
+    font-size:1rem;
 }
+
+#start>h1{
+    font-size:1.5rem;
+}
+
+#start>h1>a{
+    color:blue;
+}
+
