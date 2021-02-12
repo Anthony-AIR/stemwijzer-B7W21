@@ -3,6 +3,7 @@ const startbutton = document.getElementById("startbtn");
 const container = document.getElementById("container");
 const startCont = document.getElementById("startCont");
 const hiddenbtn = document.querySelectorAll(".hidden");
+let statementAnwser = 0;
 
 startbutton.onclick = start;
 
@@ -16,8 +17,7 @@ function start(){
     startCont.parentNode.removeChild(startCont);
     document.body.style.background="white";
     show();
-    var statement1 = 0;
-    statments( statement1 );
+    statments();
 }
 
 function show() {
@@ -26,8 +26,9 @@ function show() {
     }
 }
 
-function statments( statement ){
-    document.getElementById("title").innerHTML = subjects[0];
+function statments(){
+    document.getElementById("title").innerHTML = subjects[statementAnwser].title;
+    document.getElementById("statement").innerHTML = subjects[statementAnwser].statement;
 }
 
 console.log(subjects);
