@@ -27,7 +27,6 @@ body{
     top: 50%;
     left: 50%;
     transform:translate(-50%,-50%);
-    background-color: blue;
     opacity: 1;
 }
 
@@ -64,10 +63,11 @@ body{
 
 #eens{
     background-color: green;
+    margin-left: 10px;
 }
 
 #geenVanBeide, #skip, #previous{
-    background-color: #EDE7F6;
+    background-color: #9E9E9E;
     color: black;
 }
 

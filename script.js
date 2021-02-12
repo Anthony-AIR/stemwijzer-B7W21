@@ -16,12 +16,18 @@ function start(){
     startCont.parentNode.removeChild(startCont);
     document.body.style.background="white";
     show();
+    var statement1 = 0;
+    statments( statement1 );
 }
-
-
 
 function show() {
-  for (var i = 0; i < hiddenbtn.length; i++) {
-    hiddenbtn[i].classList.remove("hidden")
-  }
+    for (var i = 0; i < hiddenbtn.length; i++) {
+      hiddenbtn[i].classList.remove("hidden")
+    }
 }
+
+function statments( statement ){
+    document.getElementById("title").innerHTML = subjects[0];
+}
+
+console.log(subjects);
