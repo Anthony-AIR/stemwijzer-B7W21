@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/66499e4192.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <!--<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>-->
-    <script src="script.js" ></script>
+    
     <title>stemwijzer</title>
 </head>
 <body>
-    <div id="start" >
+    <div id="startCont" >
         <h1><a>Stem</a>Wijzer</h1>
         <p>Test je politieke voorkeur aan de hand van 30 stellingen</p>
-        <button id="startbtn" >START</button>
+        <button id="startbtn">START</button>
     </div>
-    <div id="container">
-
+    <div id="container" class="containerLoc1">
+        <button class="btn hidden" id="previous"><i class="fas fa-arrow-left"></i></button>
+        <button class="btn hidden bottom" id="eens"><i class="fas fa-thumbs-up"></i>eens</button>
+        <button class="btn hidden bottom" id="geenVanBeide">~ geen van beide</button>
+        <button class="btn hidden bottom" id="oneens"><i class="fas fa-thumbs-down"></i>oneens</button>
+        <button class="btn hidden bottom" id="skip">skip</button>
     </div>
 </body>
+<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
+<script src="script.js" ></script>
 </html>

@@ -1,5 +1,5 @@
 :root{
-    font-size:24px;
+    font-size: 24px;
 }
 
 body{
@@ -8,47 +8,104 @@ body{
 }
 
 #container{
-    position:absolute;
-    top:55%;
-    left:55%;
-    transform:translate(-50%,-50%);
     width: 900px;
     height: 700px;
-    background-color: black;
     border-radius: 20px;
-    opacity:0.8;
 }
 
-#start{
-    position:absolute;
-    top:34%;
-    left:44%;
+.containerLoc1{
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    transform:translate(-50%,-50%);
+    background-color: black;
+    opacity: 0.8;
+}
+
+.containerLoc2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    background-color: blue;
+    opacity: 1;
+}
+
+.hidden{
+    display:none;
+}
+
+.btn{
+    border-radius: 16px;
+    padding: 21px 29px;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.btn>i{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+#previous{
+    padding:17px 0px 17px 5px;
+    border-radius:100px;
+    width:65px;
+}
+
+#oneens{
+    background-color: red;
+    margin-right: 70px;
+}
+
+#eens{
+    background-color: green;
+}
+
+#geenVanBeide, #skip, #previous{
+    background-color: #EDE7F6;
+    color: black;
+}
+
+.bottom{
+    position: relative;
+    top: 87%;
+}
+
+#startCont{
+    position: absolute;
+    top: 34%;
+    left: 44%;
     transform:translate(-50%,-50%);
     width: 530px;
     height: 330px;
     background-color: white;
     border-radius: 20px;
-    z-index:2;
-    padding:70px;
+    z-index: 2;
+    padding: 70px;
 }
 
 #startbtn{
-    position:absolute;
-    top:70%;
-    width:100px;
-    height:60px;
-    background-color:blue;
-    color:white;
-    border-radius:10px;
-    border:none;
-    font-size:1rem;
+    position: absolute;
+    top: 70%;
+    width: 100px;
+    height: 60px;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
 }
 
-#start>h1{
+#startCont>h1{
     font-size:1.5rem;
 }
 
-#start>h1>a{
+#startCont>h1>a{
     color:blue;
 }
 
