@@ -3,9 +3,21 @@ const startbutton = document.getElementById("startbtn");
 const container = document.getElementById("container");
 const startCont = document.getElementById("startCont");
 const hiddenbtn = document.querySelectorAll(".hidden");
-let statementAnwser = 0;
+const previous = document.getElementById("previous");
+const eens = document.getElementById("eens");
+const geen = document.getElementById("geenVanBeide");
+const oneens = document.getElementById("oneens");
+const skip = document.getElementById("skip");
+var statement = 0;
+var statementsanswer = [];
+
 
 startbutton.onclick = start;
+previous.onclick = previousStatement;
+eens.onclick = pro;
+geen.onclick = none;
+skip.onclick = none;
+oneens.onclick = contra;
 
 
 function start(){
@@ -17,7 +29,7 @@ function start(){
     startCont.parentNode.removeChild(startCont);
     document.body.style.background="white";
     show();
-    statments();
+    showStatements();
 }
 
 function show() {
@@ -26,9 +38,36 @@ function show() {
     }
 }
 
-function statments(){
-    document.getElementById("title").innerHTML = subjects[statementAnwser].title;
-    document.getElementById("statement").innerHTML = subjects[statementAnwser].statement;
+function showStatements(){
+    document.getElementById("title").innerHTML = subjects[statement].title;
+    document.getElementById("statement").innerHTML = subjects[statement].statement;
+}
+
+function pro(){
+    statementsanswer.push("pro");
+    statement++;
+    showStatements();
+}
+
+function contra(){
+    statementsanswer.push("contra");
+    statementsanswer[0]="test";
+    console.log(statementsanswer);
+    statement++;
+    showStatements();
+}
+
+function none(){
+    statementsanswer.push("none");
+    statement++;
+    showStatements();
+}
+
+function previousStatement(){
+    if (statement > 0 ){
+      statement--;
+      showStatements();  
+    }
 }
 
 console.log(subjects);
