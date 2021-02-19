@@ -43,43 +43,35 @@ function showStatements(){
     if (statement == 30){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
         document.getElementById("statement").innerHTML = "Kies alle partijen, alleen de partijen die nu al in de Tweede Kamer zitten, of maak zelf een selectie. Selecteer minimaal 3 partijen.";
+        console.log(statementsanswer);
     }
     else{
+        statement++;
         document.getElementById("title").innerHTML = subjects[statement].title;
         document.getElementById("statement").innerHTML = subjects[statement].statement; 
+        normaleButtonColor();
     }
     
 }
 
 function pro(){
-    statementsanswer.push("pro");
-    statement++;
-    showStatements();
+    statementsanswer[statement] = "pro";
+    showStatements(); 
 }
 
 function contra(){
-    console.log(statementsanswer[statement]);
-    if (statementsanswer[statement] == ""){
-      statementsanswer.push("contra");
-      statement++;
-      showStatements(); 
-    }
-    else{
-        console.log("niet empty");
-        statementsanswer[statement]="contra";
-    }
-
-    
+    statementsanswer[statement] = "contra";
+    showStatements(); 
 }
 
 function none(){
-    statementsanswer.push("none");
-    statement++;
-    showStatements();
+    statementsanswer[statement] = "none";
+    showStatements(); 
 }
 
 function previousStatement(){
     if (statement > 0 ){
+        statement--;
         statement--;
         prevAnwsers();
         showStatements();  
@@ -88,23 +80,29 @@ function previousStatement(){
 
 function prevAnwsers(){
     if(statementsanswer[statement] == "pro"){
-        document.getElementById("eens").style.backgroundColor = "blue";
-        document.getElementById("oneens").style.backgroundColor = "red";
-        document.getElementById("geenVanBeide").style.backgroundColor = "#9E9E9E";
+        eens.style.backgroundColor = "blue";
+        oneens.style.backgroundColor = "red";
+        geen.style.backgroundColor = "#9E9E9E";
     }
 
     else if(statementsanswer[statement] == "contra"){
-        document.getElementById("oneens").style.backgroundColor = "blue";
-        document.getElementById("eens").style.backgroundColor = "green";
-        document.getElementById("geenVanBeide").style.backgroundColor = "#9E9E9E";
+        oneens.style.backgroundColor = "blue";
+        eens.style.backgroundColor = "green";
+        geen.style.backgroundColor = "#9E9E9E";
 
     }
 
     else if(statementsanswer[statement] == "none"){
-        document.getElementById("geenVanBeide").style.backgroundColor = "blue";
-        document.getElementById("oneens").style.backgroundColor = "red";
-        document.getElementById("eens").style.backgroundColor = "green";
+        geen.style.backgroundColor = "blue";
+        oneens.style.backgroundColor = "red";
+        eens.style.backgroundColor = "green";
     }
+}
+
+function normaleButtonColor(){
+    eens.style.backgroundColor = "green";
+    oneens.style.backgroundColor = "red";
+    geen.style.backgroundColor = "#9E9E9E";
 }
 
 
