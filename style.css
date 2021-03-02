@@ -125,3 +125,7 @@ body{
     flex-direction: column;
     flex-wrap: wrap;
 }
+
+#partijenContainer>p{
+    font-size:18px
+}

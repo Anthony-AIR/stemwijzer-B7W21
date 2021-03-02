@@ -10,7 +10,12 @@ const oneens = document.getElementById("oneens");
 const skip = document.getElementById("skip");
 var statement = 0;
 var statementsanswer = [];
-var results = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+var results = { "VVD": 0, "CDA": 0, "PVV": 0, "D66": 0, "GroenLinks": 0, "SP": 0, 
+                    "PvdA": 0, "ChristenUnie": 0, "Partij voor de Dieren": 0, "SGP": 0,
+                    "DENK": 0, "Forum voor Democratie": 0, "Lokaal in de Kamer": 0,
+                    "OndernemersPartij": 0, "VNL": 0, "Nieuwe Wegen": 0, "De Burger Beweging": 0,
+                    "Piratenpartij": 0, "Artikel 1": 0, "Libertarische Partij": 0, "50Plus": 0,
+                    "Vrijzinnige Partij": 0, "Niet Stemmers": 0 };
 
 
 startbutton.onclick = start;
@@ -128,184 +133,66 @@ function createPartyButtons(){
 
 function calculateResults(){
     var i = 0;
-    var vvd = 0;
-    var cda = 0;
-    var pvv = 0;
-    var d66 = 0;
-    var groenLinks = 0;
-    var sp = 0;
-    var pvda = 0;
-    var christenUnie = 0;
-    var partijVoorDeDieren = 0;
-    var sgp = 0;
-    var denk = 0;
-    var forumVoorDemocratie = 0;
-    var lokaalInDeKamer = 0;
-    var ondernemersPartij = 0;
-    var vnl = 0;
-    var nieuweWegen = 0;
-    var deBurgerBeweging = 0;
-    var piratenpartij = 0;
-    var artikel1 = 0;
-    var libertarischePartij = 0;
-    var Plus50 = 0;
-    var vrijzinnigePartij = 0;
-    var nietStemmers = 0;
-    /*var results = [{vvd: 0}, {cda: 0}, {pvv: 0},{d66: 0}, {groenLinks: 0}, {sp: 0}, {pvda: 0}, {christenUnie: 0}, {partijVoorDeDieren: 0}, {sgp: 0}, {denk: 0},
-        {forumVoorDemocratie: 0}, {lokaalInDeKamer: 0}, {ondernemersPartij: 0}, {vnl: 0}, {nieuweWegen: 0}, {deBurgerBeweging: 0}, {piratenpartij: 0}, {artikel1: 0},
-        {libertarischePartij: 0}, {Plus50: 0}, {vrijzinnigePartij: 0}, {nietStemmers: 0}];*/
     subjects.forEach(subject => {
         subject.parties.forEach(partie => {
             if(statementsanswer[i] == partie.position){
-                if(partie.name == "VVD"){
-                    //results[0].vvd++;
-                    results[0]++;
-                }
-                else if(partie.name == "CDA"){
-                    //results[1].cda++;
-                    results[1]++;
-                }
-                else if(partie.name == "pvv"){
-                    //results[2].pvv++;
-                    results[2]++;
-                }
-                else if(partie.name == "d66"){
-                    //results[3].d66++;
-                    results[3]++;
-                }
-                else if(partie.name == "GroenLinks"){
-                    //results[4].groenLinks++;
-                    results[4]++;
-                }
-                else if(partie.name == "SP"){
-                    //results[5].sp++;
-                    results[5]++;
-                }
-                else if(partie.name == "PvdA"){
-                    //results[6].pvda++;
-                    results[6]++;
-                }
-                else if(partie.name == "ChristenUnie"){
-                    //results[7].christenUnie++;
-                    results[7]++;
-                }
-                else if(partie.name == "Partij voor de Dieren"){
-                    //results[8].partijVoorDeDieren++;
-                    results[8]++;
-                }
-                else if(partie.name == "SGP"){
-                    //results[9].sgp++;
-                    results[9]++;
-                }
-                else if(partie.name == "DENK"){
-                    //results[10].denk++;
-                    results[10]++;
-                }
-                else if(partie.name == "Forum voor Democratie"){
-                    //results[11].forumVoorDemocratie++;
-                    results[11]++;
-                }
-                else if(partie.name == "Lokaal in de Kamer"){
-                    //results[12].lokaalInDeKamer++;
-                    results[12]++;
-                }
-                else if(partie.name == "OndernemersPartij"){
-                    //results[13].ondernemersPartij++;
-                    results[13]++;
-                }
-                else if(partie.name == "VNL"){
-                    //results[14].vnl++;
-                    results[14]++;
-                }
-                else if(partie.name == "Nieuwe Wegen"){
-                    //results[15].nieuweWegen++;
-                    results[15]++;
-                }
-                else if(partie.name == "De Burger Beweging"){
-                    //results[16].deBurgerBeweging++;
-                    results[16]++;
-                }
-                else if(partie.name == "Piratenpartij"){
-                    //results[17].piratenpartij++;
-                    results[17]++;
-                }
-                else if(partie.name == "Artikel 1"){
-                    //results[18].artikel1++;
-                    results[18]++;
-                }
-                else if(partie.name == "Libertarische Partij"){
-                    //results[19].libertarischePartij++;
-                    results[19]++;
-                }
-                else if(partie.name == "50Plus"){
-                    //results[20].Plus50++;
-                    results[20]++;
-                }
-                else if(partie.name == "Vrijzinnige Partij"){
-                    //results[21].vrijzinnigePartij++;
-                    results[21]++;
-                }
-                else if(partie.name == "Niet Stemmers"){
-                    //results[22].nietStemmers++;
-                    results[22]++;
-                }
+                results[partie.name]++;
             }
         });
     i++;
     });
-    console.log(results);
+    showParties();
 }
 
-function showSecularParties(){
+function showParties(){
+    hideSecularParties();
     var i = 0;
     document.getElementById("partijenContainer").style.display = "flex";
     console.log("test");
-    console.log(results);
-    results.forEach(result => {
-            var elem = document.createElement("p");
-            elem.innerHTML = parties[i].name + ": " + result;
-            elem.id = "party" + i;
-            //elem.classList = "partijen";
-            document.getElementById("partijenContainer").appendChild(elem);
-            console.log("showSecularParties is een succes");
+    for (var key in results) {
+        var elem = document.createElement("p");
+        elem.innerHTML = key + ": " + results[key];
+        elem.id = "party" + i;
+        elem.setAttribute("data-num", results[key]);
+        //elem.classList = "partijen";
+        document.getElementById("partijenContainer").appendChild(elem);
+        console.log("showSecularParties is een succes");
         i++;
+    }
+    var div = document.getElementById("partijenContainer"),
+    para = document.querySelectorAll('#partijenContainer p');
+    var paraArr = [].slice.call(para).sort(function (a, b) {
+        return a.dataset.num < b.dataset.num ? 1 : -1;
     });
-    document.getElementById("secularPartieButton").onclick = hideSecularParties;
+    paraArr.forEach(function (p) {
+        div.appendChild(p);
+    });
+
 }
 
-function hideSecularParties(){
+function hideParties(){
     var i = 0;
     document.getElementById("partijenContainer").style.display = "none";
-    results.forEach(result => {
+    for (var key in results) {
             var elem = document.getElementById("party" + i);
-            elem.parentNode.removeChild(elem);
+            if(elem != null){
+                elem.parentNode.removeChild(elem);
+            }
         i++;
-    });
-    document.getElementById("secularPartieButton").onclick = showSecularParties;
-}
-/*
-var i = 0;
-parties.forEach(party => {
-    if(party.secular == true){
-        var elem = document.createElement("input");
-        elem.innerhtml = party.name;
-        elem.id = "party" + i;
-        elem.setAttribute("type", "checkbox");
-        container.appendChild(elem);
-        console.log("showSecularParties is een succes");
     }
-});
 }
+
+
 
 function showSecularParties(){
+    hideParties();
     var i = 0;
     document.getElementById("partijenContainer").style.display = "flex";
-    parties.forEach(party => {
-        if(party.secular == true){
+    parties.forEach(partie => {
+        if(partie.secular == true){
             var elem = document.createElement("p");
-            elem.innerHTML = party.name;
+            elem.innerHTML = key + ": " + results[key];
             elem.id = "party" + i;
-            elem.classList = "partijen";
             document.getElementById("partijenContainer").appendChild(elem);
             console.log("showSecularParties is een succes");
         }
@@ -317,13 +204,14 @@ function showSecularParties(){
 function hideSecularParties(){
     var i = 0;
     document.getElementById("partijenContainer").style.display = "none";
-    parties.forEach(party => {
-        if(party.secular == true){
+    parties.forEach(partie => {
+        if(partie.secular == true){
             var elem = document.getElementById("party" + i);
-            elem.parentNode.removeChild(elem);
+            if(elem != null){
+                elem.parentNode.removeChild(elem);
+            }
         }
         i++;
     });
     document.getElementById("secularPartieButton").onclick = showSecularParties;
 }
-*/
