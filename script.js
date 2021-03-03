@@ -145,7 +145,6 @@ function calculateResults(){
 }
 
 function showParties(){
-    hideSecularParties();
     var i = 0;
     document.getElementById("partijenContainer").style.display = "flex";
     console.log("test");
@@ -159,15 +158,7 @@ function showParties(){
         console.log("showSecularParties is een succes");
         i++;
     }
-    var div = document.getElementById("partijenContainer"),
-    para = document.querySelectorAll('#partijenContainer p');
-    var paraArr = [].slice.call(para).sort(function (a, b) {
-        return a.dataset.num < b.dataset.num ? 1 : -1;
-    });
-    paraArr.forEach(function (p) {
-        div.appendChild(p);
-    });
-
+    sortParties();
 }
 
 function hideParties(){
@@ -182,7 +173,16 @@ function hideParties(){
     }
 }
 
-
+function sortParties(){
+    var div = document.getElementById("partijenContainer"),
+    para = document.querySelectorAll('#partijenContainer p');
+    var paraArr = [].slice.call(para).sort(function (a, b) {
+        return a.dataset.num < b.dataset.num ? 1 : -1;
+    });
+    paraArr.forEach(function (p) {
+        div.appendChild(p);
+    });
+}
 
 function showSecularParties(){
     hideParties();
@@ -190,14 +190,20 @@ function showSecularParties(){
     document.getElementById("partijenContainer").style.display = "flex";
     parties.forEach(partie => {
         if(partie.secular == true){
-            var elem = document.createElement("p");
-            elem.innerHTML = key + ": " + results[key];
-            elem.id = "party" + i;
-            document.getElementById("partijenContainer").appendChild(elem);
-            console.log("showSecularParties is een succes");
+            for (var key in results) {
+                if( partie.name == key ){
+                    var elem = document.createElement("p");
+                    elem.innerHTML = key + ": " + results[key];
+                    elem.id = "party" + i;
+                    elem.setAttribute("data-num", results[key]);
+                    document.getElementById("partijenContainer").appendChild(elem);
+                    console.log("showSecularParties is een succes");
+                }
+            }
         }
         i++;
     });
+    sortParties();
     document.getElementById("secularPartieButton").onclick = hideSecularParties;
 }
 
@@ -213,5 +219,6 @@ function hideSecularParties(){
         }
         i++;
     });
+    showParties();
     document.getElementById("secularPartieButton").onclick = showSecularParties;
 }
