@@ -8,6 +8,7 @@ const eens = document.getElementById("eens");
 const geen = document.getElementById("geenVanBeide");
 const oneens = document.getElementById("oneens");
 const skip = document.getElementById("skip");
+const partijenContainer = document.getElementById("partijenContainer");
 var statement = 0;
 var statementsanswer = [];
 var results = { "VVD": 0, "CDA": 0, "PVV": 0, "D66": 0, "GroenLinks": 0, "SP": 0, 
@@ -17,7 +18,7 @@ var results = { "VVD": 0, "CDA": 0, "PVV": 0, "D66": 0, "GroenLinks": 0, "SP": 0
                     "Piratenpartij": 0, "Artikel 1": 0, "Libertarische Partij": 0, "50Plus": 0,
                     "Vrijzinnige Partij": 0, "Niet Stemmers": 0 };
 
-
+//alle onclicks
 startbutton.onclick = start;
 previous.onclick = previousStatement;
 eens.onclick = pro;
@@ -25,7 +26,7 @@ geen.onclick = none;
 skip.onclick = none;
 oneens.onclick = contra;
 
-document.getElementById("partijenContainer").style.display = "none";
+partijenContainer.style.display = "none";
 
 function start(){
     //relocates container
@@ -33,10 +34,11 @@ function start(){
     container.classList.add("containerLoc2");
     //removes startCont and background
     startCont.parentNode.removeChild(startCont);
-    document.body.style.background="yellow";
+    document.body.style.background = "white";
     showButtons();
     showStatements();
 }
+
 
 function showButtons() {
     for (var i = 0; i < hiddenbtn.length; i++){
@@ -54,7 +56,6 @@ function hideButtons() {
 function showStatements(){
     if (statement == 30){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
-        document.getElementById("statement").innerHTML = "Kies alle partijen, alleen de partijen die nu al in de Tweede Kamer zitten, of maak zelf een selectie. Selecteer minimaal 3 partijen.";
         hideButtons();
         createPartyButtons();
         calculateResults();
@@ -62,14 +63,13 @@ function showStatements(){
     else{
         document.getElementById("title").innerHTML = subjects[statement].title;
         document.getElementById("statement").innerHTML = subjects[statement].statement;
-    }
-    
+    }  
 }
 
+//antwoorden functies
 function pro(){
     prevAnwsers();
     statementsanswer[statement] = "pro";
-    console.log(statement);
     statement++;
     showStatements(); 
 }
@@ -88,6 +88,7 @@ function none(){
     showStatements(); 
 }
 
+//back function and button color for back
 function previousStatement(){
     if (statement > 0 ){
         statement--;
@@ -122,14 +123,23 @@ function prevAnwsers(){
     }
 }
 
+
 function createPartyButtons(){
     var btn = document.createElement("button");
     btn.innerHTML = "all secular parties";
     btn.id = "secularPartieButton";
+    btn.className = "btn";
     container.appendChild(btn);
     document.getElementById("secularPartieButton").onclick = showSecularParties;
-    console.log(statementsanswer);
+
+    var btn = document.createElement("button");
+    btn.innerHTML = "all big parties";
+    btn.id = "BigPartieButton";
+    btn.className = "btn";
+    container.appendChild(btn);
+    document.getElementById("BigPartieButton").onclick = showBigParties;
 }
+
 
 function calculateResults(){
     var i = 0;
@@ -144,18 +154,17 @@ function calculateResults(){
     showParties();
 }
 
+//all parties show and hide
 function showParties(){
     var i = 0;
-    document.getElementById("partijenContainer").style.display = "flex";
-    console.log("test");
+    document.getElementById("statement").innerHTML = "dit zijn alle partijen:";
+    partijenContainer.style.display = "flex";
     for (var key in results) {
         var elem = document.createElement("p");
         elem.innerHTML = key + ": " + results[key];
         elem.id = "party" + i;
         elem.setAttribute("data-num", results[key]);
-        //elem.classList = "partijen";
-        document.getElementById("partijenContainer").appendChild(elem);
-        console.log("showSecularParties is een succes");
+        partijenContainer.appendChild(elem);
         i++;
     }
     sortParties();
@@ -163,31 +172,23 @@ function showParties(){
 
 function hideParties(){
     var i = 0;
-    document.getElementById("partijenContainer").style.display = "none";
+    partijenContainer.style.display = "none";
     for (var key in results) {
-            var elem = document.getElementById("party" + i);
-            if(elem != null){
-                elem.parentNode.removeChild(elem);
-            }
+        var elem = document.getElementById("party" + i);
+        if(elem != null){
+            elem.parentNode.removeChild(elem);
+        }
         i++;
     }
 }
 
-function sortParties(){
-    var div = document.getElementById("partijenContainer"),
-    para = document.querySelectorAll('#partijenContainer p');
-    var paraArr = [].slice.call(para).sort(function (a, b) {
-        return a.dataset.num < b.dataset.num ? 1 : -1;
-    });
-    paraArr.forEach(function (p) {
-        div.appendChild(p);
-    });
-}
 
+//secular paties show and hide
 function showSecularParties(){
     hideParties();
+    document.getElementById("statement").innerHTML = "dit zijn alle seculare partijen:";
     var i = 0;
-    document.getElementById("partijenContainer").style.display = "flex";
+    partijenContainer.style.display = "flex";
     parties.forEach(partie => {
         if(partie.secular == true){
             for (var key in results) {
@@ -196,8 +197,7 @@ function showSecularParties(){
                     elem.innerHTML = key + ": " + results[key];
                     elem.id = "party" + i;
                     elem.setAttribute("data-num", results[key]);
-                    document.getElementById("partijenContainer").appendChild(elem);
-                    console.log("showSecularParties is een succes");
+                    partijenContainer.appendChild(elem);
                 }
             }
         }
@@ -208,17 +208,49 @@ function showSecularParties(){
 }
 
 function hideSecularParties(){
+    hideParties();
+    showParties();
+    document.getElementById("secularPartieButton").onclick = showSecularParties;
+}
+
+//big parties show and hide
+function showBigParties(){
+    hideParties();
+    document.getElementById("statement").innerHTML = "dit zijn alle grote partijen:";
     var i = 0;
-    document.getElementById("partijenContainer").style.display = "none";
+    partijenContainer.style.display = "flex";
     parties.forEach(partie => {
-        if(partie.secular == true){
-            var elem = document.getElementById("party" + i);
-            if(elem != null){
-                elem.parentNode.removeChild(elem);
+        if(partie.size >= 10){
+            for (var key in results) {
+                if( partie.name == key ){
+                    var elem = document.createElement("p");
+                    elem.innerHTML = key + ": " + results[key];
+                    elem.id = "party" + i;
+                    elem.setAttribute("data-num", results[key]);
+                    partijenContainer.appendChild(elem);
+                }
             }
         }
         i++;
     });
-    showParties();
-    document.getElementById("secularPartieButton").onclick = showSecularParties;
+    sortParties();
+    document.getElementById("BigPartieButton").onclick = hideBigParties;
 }
+
+function hideBigParties(){
+    hideParties();
+    showParties();
+    document.getElementById("BigPartieButton").onclick = showBigParties;
+}
+
+// sort
+function sortParties(){
+    var para = document.querySelectorAll('#partijenContainer p');
+    var paraArr = [].slice.call(para).sort(function (a, b) {
+        return b.dataset.num - a.dataset.num;
+    });
+    paraArr.forEach(function (p) {
+        partijenContainer.appendChild(p);
+    });
+}
+

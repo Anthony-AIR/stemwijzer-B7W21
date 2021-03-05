@@ -45,6 +45,11 @@ body{
     border: none;
 }
 
+#secularPartieButton, #BigPartieButton{
+    background-color: blue;
+    margin-left: 100px;
+}
+
 .btn>i{
     width: 20px;
     height: 20px;
