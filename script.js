@@ -11,12 +11,11 @@ const skip = document.getElementById("skip");
 const partijenContainer = document.getElementById("partijenContainer");
 var statement = 0;
 var statementsanswer = [];
-var results = { "VVD": 0, "CDA": 0, "PVV": 0, "D66": 0, "GroenLinks": 0, "SP": 0, 
-                    "PvdA": 0, "ChristenUnie": 0, "Partij voor de Dieren": 0, "SGP": 0,
-                    "DENK": 0, "Forum voor Democratie": 0, "Lokaal in de Kamer": 0,
-                    "OndernemersPartij": 0, "VNL": 0, "Nieuwe Wegen": 0, "De Burger Beweging": 0,
-                    "Piratenpartij": 0, "Artikel 1": 0, "Libertarische Partij": 0, "50Plus": 0,
-                    "Vrijzinnige Partij": 0, "Niet Stemmers": 0 };
+var results = { };
+
+for(i = 0; i < parties.length; i++){
+    results[parties[i].name] = 0;
+}
 
 //alle onclicks
 startbutton.onclick = start;
@@ -54,11 +53,12 @@ function hideButtons() {
 }
 
 function showStatements(){
-    if (statement == 30){
+    if (statement == subjects.length){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
         hideButtons();
         createPartyButtons();
         calculateResults();
+        showParties();
     }
     else{
         document.getElementById("title").innerHTML = subjects[statement].title;
@@ -93,7 +93,7 @@ function previousStatement(){
     if (statement > 0 ){
         statement--;
         prevAnwsers();
-        if(statement == 29){
+        if(statement == subjects.length-1){
             showButtons();
         }
         showStatements();  
@@ -151,7 +151,6 @@ function calculateResults(){
         });
     i++;
     });
-    showParties();
 }
 
 //all parties show and hide
