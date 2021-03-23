@@ -2,6 +2,23 @@
     font-size: 24px;
 }
 
+
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+}
+
+.gray{
+    background-color: #9E9E9E;
+}
+
 body{
     background-image: url('images/image.png');
     background-size: cover;
@@ -63,17 +80,14 @@ body{
 }
 
 #oneens{
-    background-color: red;
     margin-right: 70px;
 }
 
 #eens{
-    background-color: green;
     margin-left: 10px;
 }
 
 #geenVanBeide, #skip, #previous{
-    background-color: #9E9E9E;
     color: black;
 }
 
@@ -133,4 +147,20 @@ body{
 
 #partijenContainer>p{
     font-size:18px
+}
+
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+}
+
+.gray{
+    background-color: #9E9E9E;
 }

@@ -17,6 +17,7 @@ for(i = 0; i < parties.length; i++){
     results[parties[i].name] = 0;
 }
 
+document.getElementById("stelling").innerHTML = "Test je politieke voorkeur aan de hand van " + subjects.length + " stellingen";
 //alle onclicks
 startbutton.onclick = start;
 previous.onclick = previousStatement;
@@ -102,24 +103,24 @@ function previousStatement(){
 
 function prevAnwsers(){
     if(statementsanswer[statement] == "pro"){
-        eens.style.backgroundColor = "blue";
-        oneens.style.backgroundColor = "red";
-        geen.style.backgroundColor = "#9E9E9E";
+        eens.classList.remove("green");
+        oneens.classList.add("red");
+        geen.classList.add("gray");
     }
     else if(statementsanswer[statement] == "contra"){
-        oneens.style.backgroundColor = "blue";
-        eens.style.backgroundColor = "green";
-        geen.style.backgroundColor = "#9E9E9E";
+        oneens.classList.remove("red");
+        eens.classList.add("green");
+        geen.classList.add("gray");
     }
     else if(statementsanswer[statement] == "none"){
-        geen.style.backgroundColor = "blue";
-        eens.style.backgroundColor = "green";
-        oneens.style.backgroundColor = "red";
+        geen.classList.remove("gray");
+        eens.classList.add("green");
+        oneens.classList.add("red");
     }
     else if(statementsanswer[statement] == undefined){
-        oneens.style.backgroundColor = "red";
-        eens.style.backgroundColor = "green";
-        geen.style.backgroundColor = "#9E9E9E";
+        oneens.classList.add("red");
+        eens.classList.add("green");
+        geen.classList.add("gray");
     }
 }
 
