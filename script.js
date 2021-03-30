@@ -12,6 +12,7 @@ const partijenContainer = document.getElementById("partijenContainer");
 var statement = 0;
 var statementsanswer = [];
 var results = { };
+var extraPoints = ["Bindend referendum"];
 
 for(i = 0; i < parties.length; i++){
     results[parties[i].name] = 0;
@@ -56,10 +57,13 @@ function hideButtons() {
 function showStatements(){
     if (statement == subjects.length){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
+        document.getElementById("statement").innerHtML = "hello ";
         hideButtons();
-        createPartyButtons();
-        calculateResults();
-        showParties();
+        chooseExtraPoints();
+        //createPartyButtons();
+        //scorePlus();
+        //calculateResults();
+        //showParties();
     }
     else{
         document.getElementById("title").innerHTML = subjects[statement].title;
@@ -69,23 +73,23 @@ function showStatements(){
 
 //antwoorden functies
 function pro(){
-    prevAnwsers();
     statementsanswer[statement] = "pro";
     statement++;
+    prevAnwsers();
     showStatements(); 
 }
 
 function contra(){
-    prevAnwsers();
     statementsanswer[statement] = "contra";
     statement++;
+    prevAnwsers();
     showStatements(); 
 }
 
 function none(){
-    prevAnwsers();
     statementsanswer[statement] = "none";
     statement++;
+    prevAnwsers();
     showStatements(); 
 }
 
@@ -102,6 +106,9 @@ function previousStatement(){
 }
 
 function prevAnwsers(){
+    oneens.classList.add("red");
+    eens.classList.add("green");
+    geen.classList.add("gray");
     if(statementsanswer[statement] == "pro"){
         eens.classList.remove("green");
         oneens.classList.add("red");
@@ -116,11 +123,6 @@ function prevAnwsers(){
         geen.classList.remove("gray");
         eens.classList.add("green");
         oneens.classList.add("red");
-    }
-    else if(statementsanswer[statement] == undefined){
-        oneens.classList.add("red");
-        eens.classList.add("green");
-        geen.classList.add("gray");
     }
 }
 
@@ -254,3 +256,35 @@ function sortParties(){
     });
 }
 
+function scorePlus(){
+    var i = 0;
+    subjects.forEach( subject => {
+        extraPoints.forEach( extraPoint => {
+            if( subject.title == extraPoint ){
+                subject.parties.forEach( partie => {
+                    if(statementsanswer[i] == partie.position){
+                        results[partie.name]++;
+                        console.log(partie.name);
+                    } 
+                });
+            }
+        });
+        i++;
+    });
+}
+function chooseExtraPoints(){
+    subjects.forEach(subject => {
+        var checkbox = document.createElement('input'); 
+        checkbox.type = "checkbox"; 
+        checkbox.name = "name"; 
+        checkbox.value = "value"; 
+        checkbox.id = subject.title ; 
+
+        var label = document.createElement('label');
+        label.htmlFor = subject.title; 
+        label.id = "label";
+        label.innerHTML = subject.title;
+        document.getElementById("ChoosePartijenContainer").appendChild(checkbox); 
+        document.getElementById("ChoosePartijenContainer").appendChild(label);
+    });
+}

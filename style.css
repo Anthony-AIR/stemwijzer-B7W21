@@ -60,6 +60,7 @@ body{
     color: #fff;
     cursor: pointer;
     border: none;
+    z-index: 6;
 }
 
 #secularPartieButton, #BigPartieButton{
@@ -163,4 +164,25 @@ body{
 
 .gray{
     background-color: #9E9E9E;
+}
+
+#ChoosePartijenContainer{
+    position: relative;
+    left: -100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 1200px;
+    height: 420px;
+    z-index: 5;
+}
+
+#label{
+    position: relative;
+    left: 20px;
+    bottom: 24px;
+}
+
+input{
+    z-index:10;
 }
