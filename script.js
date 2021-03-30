@@ -1,6 +1,5 @@
 
 const startbutton = document.getElementById("startbtn");
-const container = document.getElementById("container");
 const startCont = document.getElementById("startCont");
 const hiddenbtn = document.querySelectorAll(".hidden");
 const previous = document.getElementById("previous");
@@ -8,11 +7,14 @@ const eens = document.getElementById("eens");
 const geen = document.getElementById("geenVanBeide");
 const oneens = document.getElementById("oneens");
 const skip = document.getElementById("skip");
+const container = document.getElementById("container");
 const partijenContainer = document.getElementById("partijenContainer");
+const ChoosePartijenContainer = document.getElementById("ChoosePartijenContainer");
 var statement = 0;
 var statementsanswer = [];
 var results = { };
-var extraPoints = ["Bindend referendum"];
+var extraPoints = [];
+var checkboxes = [];
 
 for(i = 0; i < parties.length; i++){
     results[parties[i].name] = 0;
@@ -57,18 +59,30 @@ function hideButtons() {
 function showStatements(){
     if (statement == subjects.length){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
-        document.getElementById("statement").innerHtML = "hello ";
         hideButtons();
         chooseExtraPoints();
-        //createPartyButtons();
-        //scorePlus();
-        //calculateResults();
-        //showParties();
+        ResultsButton();
     }
     else{
         document.getElementById("title").innerHTML = subjects[statement].title;
         document.getElementById("statement").innerHTML = subjects[statement].statement;
     }  
+}
+
+function showResults(){
+    checkboxesChecked();
+    destroyChooseExtraPoints();
+    createPartyButtons();
+    scorePlus();
+    calculateResults();
+    showParties();
+    container.removeChild(previous);
+}
+
+function destroyChooseExtraPoints(){
+    while (ChoosePartijenContainer.firstChild) {
+        ChoosePartijenContainer.removeChild(ChoosePartijenContainer.lastChild);
+      }
 }
 
 //antwoorden functies
@@ -101,7 +115,8 @@ function previousStatement(){
         if(statement == subjects.length-1){
             showButtons();
         }
-        showStatements();  
+        showStatements(); 
+        destroyChooseExtraPoints(); 
     }
 }
 
@@ -260,11 +275,10 @@ function scorePlus(){
     var i = 0;
     subjects.forEach( subject => {
         extraPoints.forEach( extraPoint => {
-            if( subject.title == extraPoint ){
+            if( subject.title == extraPoint.id ){
                 subject.parties.forEach( partie => {
                     if(statementsanswer[i] == partie.position){
                         results[partie.name]++;
-                        console.log(partie.name);
                     } 
                 });
             }
@@ -272,19 +286,42 @@ function scorePlus(){
         i++;
     });
 }
+
 function chooseExtraPoints(){
     subjects.forEach(subject => {
         var checkbox = document.createElement('input'); 
         checkbox.type = "checkbox"; 
         checkbox.name = "name"; 
         checkbox.value = "value"; 
+        checkbox.className = "checkBoxes";
         checkbox.id = subject.title ; 
 
         var label = document.createElement('label');
         label.htmlFor = subject.title; 
         label.id = "label";
         label.innerHTML = subject.title;
-        document.getElementById("ChoosePartijenContainer").appendChild(checkbox); 
-        document.getElementById("ChoosePartijenContainer").appendChild(label);
+        
+        ChoosePartijenContainer.appendChild(checkbox); 
+        ChoosePartijenContainer.appendChild(label);
     });
+
+}
+
+function ResultsButton(){
+    var btn = document.createElement('button');
+    btn.id = "resultsButton";
+    btn.innerHTML = "results";
+    btn.onclick = showResults;
+    
+    ChoosePartijenContainer.appendChild(btn);
+}
+
+function checkboxesChecked(){
+    checkboxes = document.querySelectorAll('input[type=checkbox]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked == true){
+            extraPoints.push(checkboxes[i]);
+            console.log(extraPoints);
+        }
+    }
 }
