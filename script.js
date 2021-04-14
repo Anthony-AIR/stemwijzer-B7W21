@@ -1,4 +1,8 @@
-
+/**
+ * alle variable die nodig zijn in dit bestand worden hier
+ * aangesproken zodat je ze maar op 1 plek hoeft aaantepassen 
+ * en niet op 10 verschillende plekken
+ */
 const startbutton = document.getElementById("startbtn");
 const startCont = document.getElementById("startCont");
 const hiddenbtn = document.querySelectorAll(".hidden");
@@ -56,6 +60,12 @@ function hideButtons() {
     previous.classList.remove("hidden");
 }
 
+/**
+ * showStatements is een functie die alle statements op beeld laat komen en zodra
+ * de laatste statement is gegeven de buttons hide en naar chooseExtraPoints gaat
+ * chooseExtraPoints geeft alle statements op 1 scherm weer zodat je kan kiezen welke
+ * statement meer gewicht heeft bij de punten telling
+ */
 function showStatements(){
     if (statement == subjects.length){
         document.getElementById("title").innerHTML = "Welke partijen wil je meenemen in het resultaat?";
@@ -69,6 +79,12 @@ function showStatements(){
     }  
 }
 
+/**
+ * showResult is aangemaakt zodat alle functies singleResponsibilities hebben
+ * en zodat je een makelijk overzicht hebt van alle functies en op welke volgorde 
+ * ze worden uitgevoerd alles wat in showResult staat zorgt er alleen voor dat de 
+ * resultaten gecalculeert worden en op beeld komen
+ */
 function showResults(){
     checkboxesChecked();
     destroyChooseExtraPoints();
