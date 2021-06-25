@@ -309,7 +309,7 @@ function chooseExtraPoints(){
         checkbox.type = "checkbox"; 
         checkbox.name = "name"; 
         checkbox.value = "value"; 
-        checkbox.className = "checkBoxes";
+        checkbox.className = "checkBoxes"; 
         checkbox.id = subject.title ; 
 
         var label = document.createElement('label');
